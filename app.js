@@ -1,12 +1,22 @@
-// npm --version
-// npm i <package name>
-// npm install -g <packageName>
-// npm init
-// npm init -y
+const http = require('http');
 
-const _ = require('lodash');
+const server = http.createServer((req,res)=>{
+    if(req.url === '/'){
+        res.end("Home page")
+    }
+    else if(req.url === '/about'){
+        //Blocking Code!!!
+        // for(let i=0; i < 1000; i++)
+        //     for (let j=0; j<1000; j++){
+        //         console.log(`${i} ${j}`)
+        //     }
+        res.end('About page')
+    }
+    else{
+        res.end("Other page")
+    }
+})
 
-const items = [1, [2, [3, [4]]]];
-const newItems = _.flattenDeep(items);
-console.log(newItems);
-console.log("Hello people!");
+server.listen(5000, ()=>{
+    console.log('Server listening on port 5000...')
+})
